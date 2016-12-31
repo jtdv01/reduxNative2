@@ -22,9 +22,11 @@ export default class App extends Component{
 
   render(){
     return(
-        <View>
-          <LoginForm></LoginForm>
-        </View>
+        <Provider store={createStore(reducers)}>
+          <View>
+            <LoginForm></LoginForm>
+          </View>
+        </Provider>
     );
 
   }
