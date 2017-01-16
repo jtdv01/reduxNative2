@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardSection, Input, Button } from './common';
 import { connect } from 'react-redux';
+import { Text, View } from 'react-native';
+
 class LoginForm extends Component{
   onEmailChange(text){
     // console.log("email changed");
@@ -9,6 +11,12 @@ class LoginForm extends Component{
 
   onPasswordChange(text){
     this.props.passwordChanged(text);
+  }
+
+  onButtonPress(){
+    // PASSING IN from a this.onButtonPress.bind(this) but the parameters ARE PROPS
+    const { email, password } = this.props;
+    this.props.loginUser({email, password});
   }
 
   render(){
@@ -33,10 +41,17 @@ class LoginForm extends Component{
           value={this.props.password}
         >
         </Input>
+
+      <View>
+      <Text>
+        {this.props.error}
+      </Text>
+      </View>
       </CardSection>
 
+
       <CardSection>
-        <Button> Login </Button>
+        <Button onPress={this.onButtonPress.bind(this)}> Login </Button>
       </CardSection>
 
     </Card>
@@ -44,11 +59,16 @@ class LoginForm extends Component{
   }
 }
 
+// State / reducers--------------------------
 const mapStateToProps =(state) => {
   return {
     email: state.auth.email,
     password: state.auth.password
   };
 }
-import { emailChanged, passwordChanged } from '../actions';
-export default connect(mapStateToProps,{ emailChanged, passwordChanged })(LoginForm);
+// Actions --------------------------
+import { emailChanged, passwordChanged, loginUser } from '../actions';
+export default
+  connect(mapStateToProps,
+    { emailChanged, passwordChanged, loginUser
+})(LoginForm);

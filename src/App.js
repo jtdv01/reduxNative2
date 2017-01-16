@@ -41,13 +41,13 @@ export default class App extends Component{
   }
 
   renderContent(){
-    if(this.state.loggedIn){
-      return(
-        <Button>
-          Log out
-        </Button>
-      );
-    }
+    // if(this.state.loggedIn){
+    //   return(
+    //     <Button>
+    //       Log out
+    //     </Button>
+    //   );
+    // }
 
     return <LoginForm />;
   }
