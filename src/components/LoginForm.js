@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card, CardSection, Input, Button } from './common';
 import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
-
 class LoginForm extends Component{
   onEmailChange(text){
     // console.log("email changed");

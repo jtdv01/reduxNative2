@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import firebase from 'firebase';
 import reducers from './reducers';
-import LoginForm from './components/LoginForm';
 import { applyMiddleware } from 'redux';
-import { Header, Button } from './components/common';
+import { Button } from './components/common';
+import RouterComponent from './RouterComponent';
 
 // issue with 2.x
 import ReduxThunk from 'redux-thunk';
@@ -49,18 +49,17 @@ export default class App extends Component{
     //   );
     // }
 
-    return <LoginForm />;
+    return <RouterComponent />;
   }
 
 
   render(){
-    // store must now be static
+    // Gotchas:
+    // - store must now be static
+    // - Don't use Header from common
     return(
         <Provider store={store}>
-          <View>
-            <Header headerText="Header"></Header>
-            {this.renderContent()}
-          </View>
+          <RouterComponent />
         </Provider>
     );
 

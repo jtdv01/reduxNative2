@@ -31,7 +31,8 @@ export const loginUser = ({ email,password }) =>{
         firebase.auth().createUserWithEmailAndPassword(email,password)
           .then(user => {
             loginUserSucess(dispatch, user)
-          .catch(() => {
+          .catch((error) => {
+            console.log(error);
             loginUserFail(dispatch);
           });
         })
@@ -44,10 +45,14 @@ const loginUserFail = (dispatch) => {
     type: LOGIN_USER_FAIL
   });
 }
+
+import { Actions } from 'react-native-router-flux';
 const loginUserSucess = (dispatch, user) => {
   console.log("Dispatching login user sucess");
   dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   })
+
+  Actions.employeeList();
 };
